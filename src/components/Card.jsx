@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "../styles/card.module.css";
+import { Link } from "react-router-dom";
 
 export default function Card({
   id,
@@ -23,7 +24,10 @@ export default function Card({
       className={styles.card}
       style={isAdded ? { backgroundColor: "#ddd", color: "#000" } : {}}
     >
-      <p>{title}</p>
+      <Link to={`../item/${id}`}>
+        <p>{title}</p>
+      </Link>
+
       <p>price : {price}</p>
       <label htmlFor="amount">amount: </label>
       {/* <img src={image} alt={title} /> */}
