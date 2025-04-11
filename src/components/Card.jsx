@@ -6,16 +6,16 @@ export default function Card({
   title,
   price,
   isAdded,
+  isFavourite,
   initialAmount,
-  onSelection,
-  onRemoval,
+  onAddClick,
+  onFavClick,
   image,
 }) {
   const [amount, setAmount] = useState(initialAmount);
-  const handleClick = () => {
-    if (isAdded) {
-      onRemoval(id);
-    } else onSelection(id, amount);
+  const handleAddClick = () => {
+    if (isAdded) setAmount(1);
+    onAddClick(id, amount);
   };
   return (
     <li
@@ -27,15 +27,28 @@ export default function Card({
       <p>price : {price}</p>
       <label htmlFor="amount">amount: </label>
       {/* <img src={image} alt={title} /> */}
-      <input
-        type="number"
-        id="amount"
-        name="amount"
-        value={amount}
-        onChange={(e) => setAmount(Number(e.target.value))}
-      />
-      <button type="button" onClick={handleClick}>
-        {isAdded ? "Remove from Cart" : "Add to cart"}
+      {isAdded ? (
+        <p>{amount}</p>
+      ) : (
+        <input
+          type="number"
+          id="amount"
+          name="amount"
+          value={amount}
+          onChange={(e) => setAmount(Number(e.target.value))}
+        />
+      )}
+
+      <button type="button" onClick={handleAddClick}>
+        {isAdded ? "Remove from" : "Add to"} Cart
+      </button>
+      <button
+        type="button"
+        onClick={() => {
+          onFavClick(id);
+        }}
+      >
+        {isFavourite ? "Remove from favs" : "Add to favs"}
       </button>
     </li>
   );

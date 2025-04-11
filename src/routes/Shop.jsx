@@ -11,8 +11,8 @@ export default function Shop() {
         data={phones.phonesData}
         error={phones.phonesDataError}
         isLoading={phones.isLoadingPhones}
-        onSelection={phones.handlePhoneSelection}
-        onRemoval={phones.handlePhoneRemoval}
+        onAddClick={phones.handleAddClickPhone}
+        onFavClick={phones.handleFavouriteClickPhone}
       />
 
       <hr />
@@ -21,8 +21,8 @@ export default function Shop() {
         data={laptops.laptopsData}
         error={laptops.laptopsDataError}
         isLoading={laptops.isLoadingLaptops}
-        onSelection={laptops.handleLaptopSelection}
-        onRemoval={phones.handleLaptopRemoval}
+        onAddClick={laptops.handleAddClickLaptop}
+        onFavClick={laptops.handleFavouriteClickLaptop}
       />
     </div>
   );

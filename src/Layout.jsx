@@ -14,7 +14,8 @@ export default function Layout() {
     error: laptopsDataError,
     setData: setLaptopsData,
   } = useFetch("https://dummyjson.com/products/category/laptops?limit=2");
-  const handleSelection = (id, amount, data, setData) => {
+
+  const handleAddClick = (id, amount, data, setData) => {
     if (!data) return;
     setData(
       data.map((product) =>
@@ -22,32 +23,36 @@ export default function Layout() {
           ? product
           : {
               ...product,
-              isAdded: true,
-              amount: amount,
+              isAdded: !product.isAdded,
+              amount: product.isAdded ? 1 : amount,
             }
       )
     );
   };
-  const handleRemoval = (id, data, setData) => {
-    setData(
-      data.map((product) =>
-        product.id !== id ? product : { ...product, isAdded: false, amount: 1 }
-      )
-    );
+
+  const handleAddClickPhone = (id, amount) => {
+    handleAddClick(id, amount, phonesData, setPhonesData);
+  };
+  const handleAddClickLaptop = (id, amount) => {
+    handleAddClick(id, amount, laptopsData, setLaptopsData);
   };
 
-  const handlePhoneSelection = (id, amount) => {
-    handleSelection(id, amount, phonesData, setPhonesData);
+  const handleFavouriteClick = (id, data, setData) => {
+    setData(
+      data.map((product) => {
+        return product.id === id
+          ? { ...product, isFavourite: !product.isFavourite }
+          : product;
+      })
+    );
   };
-  const handleLaptopSelection = (id, amount) => {
-    handleSelection(id, amount, laptopsData, setLaptopsData);
+  const handleFavouriteClickPhone = (id) => {
+    handleFavouriteClick(id, phonesData, setPhonesData);
   };
-  const handlePhoneRemoval = (id) => {
-    handleRemoval(id, phonesData, setPhonesData);
+  const handleFavouriteClickLaptop = (id) => {
+    handleFavouriteClick(id, laptopsData, setLaptopsData);
   };
-  const handleLaptopRemoval = (id) => {
-    handleRemoval(id, laptopsData, setLaptopsData);
-  };
+
   return (
     <>
       <header>
@@ -63,15 +68,15 @@ export default function Layout() {
             phonesData,
             phonesDataError,
             isLoadingPhones,
-            handlePhoneSelection,
-            handlePhoneRemoval,
+            handleAddClickPhone,
+            handleFavouriteClickPhone,
           },
           laptops: {
             laptopsData,
             laptopsDataError,
             isLoadingLaptops,
-            handleLaptopSelection,
-            handleLaptopRemoval,
+            handleAddClickLaptop,
+            handleFavouriteClickLaptop,
           },
         }}
       />

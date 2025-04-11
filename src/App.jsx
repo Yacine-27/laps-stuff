@@ -18,8 +18,8 @@ function App() {
         { index: true, element: <Home /> },
         { path: "shop", element: <Shop /> },
         { path: "cart", element: <Cart /> },
-        { path: "item", element: <Item /> },
         { path: "favourites", element: <Favourites /> },
+        { path: "item/:id", element: <Item /> },
       ],
     },
   ];

@@ -20,6 +20,7 @@ function useFetch(url) {
               image: product.images[0],
               isAdded: false,
               amount: 1,
+              isFavourite: false,
             }))
           );
           setIsLoading(false);

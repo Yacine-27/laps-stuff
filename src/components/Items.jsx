@@ -4,8 +4,8 @@ export default function Items({
   data,
   error,
   isLoading,
-  onSelection,
-  onRemoval,
+  onAddClick,
+  onFavClick,
 }) {
   if (isLoading || !data) return <p>loading...</p>;
   if (error) return <p>An errror occured {error}</p>;
@@ -20,8 +20,9 @@ export default function Items({
           image={product.image}
           initialAmount={product.amount}
           isAdded={product.isAdded}
-          onSelection={onSelection}
-          onRemoval={onRemoval}
+          isFavourite={product.isFavourite}
+          onAddClick={onAddClick}
+          onFavClick={onFavClick}
         />
       ))}
     </ul>
