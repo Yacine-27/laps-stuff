@@ -81,9 +81,6 @@ export default function Layout() {
         }}
       />
       <hr />
-      <footer>
-        <h1>A Footer</h1>
-      </footer>
     </>
   );
 }

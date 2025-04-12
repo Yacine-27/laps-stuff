@@ -11,7 +11,7 @@ export default function Card({
   initialAmount,
   onAddClick,
   onFavClick,
-  image,
+  // image,
 }) {
   const [amount, setAmount] = useState(initialAmount);
   const handleAddClick = () => {

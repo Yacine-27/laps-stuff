@@ -18,6 +18,8 @@ function useFetch(url) {
               title: product.title,
               price: product.price,
               image: product.images[0],
+              category:
+                product.category === "smartphones" ? "phones" : "laptops",
               isAdded: false,
               amount: 1,
               isFavourite: false,

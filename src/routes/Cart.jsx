@@ -1,4 +1,5 @@
 import { useOutletContext } from "react-router-dom";
+import Card from "../components/Card";
 
 export default function Cart() {
   const { phones, laptops } = useOutletContext();
@@ -10,22 +11,52 @@ export default function Cart() {
   };
   const addedLaptops = addedItems(laptops.laptopsData);
   const addedPhones = addedItems(phones.phonesData);
+  const calculateOneItem = (item) => {
+    return item.price * item.amount;
+  };
+  const calculateTotalPurchase = (items) => {
+    const amount = items.reduce((prev, curr) => {
+      return prev + calculateOneItem(curr);
+    }, 0);
+    return amount.toFixed(2);
+  };
   const renderItems = (items) => {
     return items.map((item) => {
       return (
-        <li key={item.id}>
-          <p>{item.title}</p>
-          <p>{item.amount}</p>
-          <p>{item.price}</p>
-        </li>
+        <Card
+          key={item.id}
+          id={item.id}
+          title={item.title}
+          price={item.price}
+          image={item.image}
+          initialAmount={item.amount}
+          isAdded={item.isAdded}
+          isFavourite={item.isFavourite}
+          onAddClick={
+            item.category === "phones"
+              ? phones.handleAddClickPhone
+              : laptops.handleAddClickLaptop
+          }
+          onFavClick={
+            item.category === "phones"
+              ? phones.handleFavouriteClickPhone
+              : laptops.handleFavouriteClickLaptop
+          }
+        />
       );
     });
   };
+  if (addedLaptops.length + addedPhones.length === 0)
+    return <p>No items are in the cart.</p>;
 
   return (
     <>
       <ul>{renderItems(addedLaptops)}</ul>
       <ul>{renderItems(addedPhones)}</ul>
+      <p>
+        Total purchase :{" "}
+        {calculateTotalPurchase([...addedLaptops, ...addedPhones])}
+      </p>
     </>
   );
 }
