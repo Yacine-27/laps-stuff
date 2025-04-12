@@ -11,3 +11,15 @@ export const getRandomItems = (array, count) => {
   const shuffled = shuffleArray(array);
   return shuffled.slice(0, count);
 };
+
+export const getFullString = (item) => {
+  return item.title.replace(/\s+/g, "").toLowerCase().concat(item.category);
+};
+
+export const getMatchedItems = (searchWord, array) => {
+  if (!searchWord) return array;
+  if (!array) return null;
+  return array.filter((item) =>
+    getFullString(item).includes(searchWord.toLowerCase())
+  );
+};
