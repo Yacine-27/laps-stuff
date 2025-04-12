@@ -1,8 +1,10 @@
 import { useOutletContext } from "react-router-dom";
 import Card from "../components/Card";
+import { useState } from "react";
 
 export default function Cart() {
-  const { phones, laptops } = useOutletContext();
+  const { phones, laptops, onReset } = useOutletContext();
+  const [showSubmitMessage, setShowSubmitMessage] = useState(false);
   const addedItems = (array) => {
     if (!array) return [];
     return array.filter((item) => {
@@ -46,6 +48,11 @@ export default function Cart() {
       );
     });
   };
+
+  const toggleSubmitMessage = () => {
+    setShowSubmitMessage(!showSubmitMessage);
+  };
+
   if (addedLaptops.length + addedPhones.length === 0)
     return <p>No items are in the cart.</p>;
 
@@ -57,6 +64,16 @@ export default function Cart() {
         Total purchase :{" "}
         {calculateTotalPurchase([...addedLaptops, ...addedPhones])}
       </p>
+      <button type="button" onClick={onReset}>
+        Reset Cart
+      </button>
+      <button onClick={toggleSubmitMessage}>Submit</button>
+      {showSubmitMessage && (
+        <div>
+          <p>Order submitted ! Unfortunately this isn't an actual shop</p>
+          <button onClick={toggleSubmitMessage}>X</button>
+        </div>
+      )}
     </>
   );
 }

@@ -52,7 +52,15 @@ export default function Layout() {
   const handleFavouriteClickLaptop = (id) => {
     handleFavouriteClick(id, laptopsData, setLaptopsData);
   };
-
+  const handleResetCategory = (category, setCategory) => {
+    setCategory(
+      category.map((product) => ({ ...product, amount: 1, isAdded: false }))
+    );
+  };
+  const handleResetCart = () => {
+    handleResetCategory(phonesData, setPhonesData);
+    handleResetCategory(laptopsData, setLaptopsData);
+  };
   return (
     <>
       <header>
@@ -78,6 +86,7 @@ export default function Layout() {
             handleAddClickLaptop,
             handleFavouriteClickLaptop,
           },
+          onReset: handleResetCart,
         }}
       />
       <hr />
