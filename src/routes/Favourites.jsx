@@ -2,6 +2,7 @@ import { useOutletContext } from "react-router-dom";
 
 export default function Favourites() {
   const { phones, laptops } = useOutletContext();
+  if (!phones.phonesData || !laptops.laptopsData) return <p>loading ...</p>;
   const favPhones = phones.phonesData.filter((phone) => phone.isFavourite);
   const favLaps = laptops.laptopsData.filter((lap) => lap.isFavourite);
   return (

@@ -48,13 +48,13 @@ export default function Cart() {
       );
     });
   };
-
   const toggleSubmitMessage = () => {
     setShowSubmitMessage(!showSubmitMessage);
   };
 
-  if (addedLaptops.length + addedPhones.length === 0)
+  if (addedLaptops.length + addedPhones.length === 0) {
     return <p>No items are in the cart.</p>;
+  }
 
   return (
     <>

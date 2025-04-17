@@ -13,7 +13,6 @@ export default function Item() {
     else if (item.category === "laptops")
       laptops.handleAddClickLaptop(item.id, item.amount);
   };
-  console.log(item);
   return (
     <div>
       <p>{item.title}</p>

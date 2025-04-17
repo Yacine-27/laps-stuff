@@ -13,13 +13,13 @@ export const getRandomItems = (array, count) => {
 };
 
 export const getFullString = (item) => {
-  return item.title.replace(/\s+/g, "").toLowerCase().concat(item.category);
+  return item.title.split(" ").join("").toLowerCase().concat(item.category);
 };
 
 export const getMatchedItems = (searchWord, array) => {
   if (!searchWord) return array;
   if (!array) return null;
   return array.filter((item) =>
-    getFullString(item).includes(searchWord.toLowerCase())
+    getFullString(item).includes(searchWord.toLowerCase().split(" ").join(""))
   );
 };
