@@ -1,15 +1,5 @@
-const shuffleArray = (array) => {
-  const arr = [...array];
-  for (let i = arr.length - 1; i > 0; i--) {
-    const randomIndex = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[randomIndex]] = [arr[randomIndex], arr[i]];
-  }
-  return arr;
-};
-
 export const getRandomItems = (array, count) => {
-  const shuffled = shuffleArray(array);
-  return shuffled.slice(0, count);
+  return array.slice(0, count);
 };
 
 export const getFullString = (item) => {
@@ -22,4 +12,11 @@ export const getMatchedItems = (searchWord, array) => {
   return array.filter((item) =>
     getFullString(item).includes(searchWord.toLowerCase().split(" ").join(""))
   );
+};
+
+export const getPriceFormat = (price, coutnryCode, multiplyBy) => {
+  return new Intl.NumberFormat("en-EG", {
+    style: "currency",
+    currency: coutnryCode,
+  }).format(Number(price * multiplyBy));
 };

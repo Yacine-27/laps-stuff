@@ -1,23 +1,33 @@
 import { useOutletContext } from "react-router-dom";
 import { getRandomItems } from "../util";
+import Header from "../components/Header";
+import TopPicks from "../components/TopPicks";
+import Spinner from "../components/Spinner";
 
 export default function Home() {
-  const { laptops, phones } = useOutletContext();
-  if (phones.isLoadingPhones || laptops.isLoadingLaptops)
-    return <p>loading ...</p>;
-  const items = getRandomItems(
-    [...laptops.laptopsData, ...phones.phonesData],
-    3
-  );
+  const { phones, laptops } = useOutletContext();
+  const isLoadingPicks = phones.isLoadingPhones || laptops.isLoadingLaptops;
+  const topPicks = isLoadingPicks
+    ? null
+    : [
+        ...getRandomItems(laptops.laptopsData, 2),
+        ...getRandomItems(phones.phonesData),
+      ];
   return (
-    <>
-      <h2>Hey this is home.</h2>
-      {items.map((item) => (
-        <li key={item.id}>
-          <p>{item.title}</p>
-          <p>{item.price}</p>
-        </li>
-      ))}
-    </>
+    <div className="bg-slate-950 text-white min-h-screen">
+      <Header />
+      {isLoadingPicks ? (
+        <Spinner />
+      ) : (
+        <TopPicks
+          topPicks={topPicks}
+          isLoadingPicks={isLoadingPicks}
+          handleAddPhone={phones.handleAddClickPhone}
+          handleAddLaptop={laptops.handleAddClickLaptop}
+          handleFavouriteClickPhone={phones.handleFavouriteClickPhone}
+          handleFavouriteClickLaptop={laptops.handleFavouriteClickLaptop}
+        />
+      )}
+    </div>
   );
 }

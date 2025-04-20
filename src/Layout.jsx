@@ -1,5 +1,6 @@
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import useFetch from "./hooks/useFetch";
+import NavBar from "./components/NavBar";
 
 export default function Layout() {
   const {
@@ -63,13 +64,7 @@ export default function Layout() {
   };
   return (
     <>
-      <header>
-        <Link to={""}>Home</Link>
-        <Link to={"shop"}>Shop</Link>
-        <Link to={"cart"}>Cart</Link>
-        <Link to={"favourites"}>Favs</Link>
-      </header>
-      <hr />
+      <NavBar />
       <Outlet
         context={{
           phones: {

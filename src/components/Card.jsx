@@ -1,6 +1,8 @@
 import { useState } from "react";
-import styles from "../styles/card.module.css";
 import { Link } from "react-router-dom";
+import ProductForm from "./ProductForm";
+
+import { getPriceFormat } from "../util";
 
 export default function Card({
   id,
@@ -8,52 +10,66 @@ export default function Card({
   price,
   isAdded,
   isFavourite,
-  initialAmount,
   onAddClick,
   onFavClick,
-  // image,
+  image,
 }) {
-  const [amount, setAmount] = useState(initialAmount);
-  const handleAddClick = () => {
-    if (isAdded) setAmount(1);
-    onAddClick(id, amount);
-  };
+  const [isFormOpen, setFormOpen] = useState(false);
+
   return (
     <li
       id={id}
-      className={styles.card}
-      style={isAdded ? { backgroundColor: "#ddd", color: "#000" } : {}}
+      className="flex flex-col rounded-xl shadow-lg bg-slate-800 w-70 p-2 justify-around"
     >
-      <Link to={`../item/${id}`}>
-        <p>{title}</p>
+      <div className="w-full h-64 overflow-hidden flex items-center justify-center bg-slate-700 rounded-xl">
+        <img src={image} alt={title} className="w-full h-full object-contain" />
+      </div>
+
+      <Link to={`../item/${id}`} className="self-center">
+        <h4 className="py-3 text-2xl font-semibold hover:underline">{title}</h4>
       </Link>
 
-      <p>price : {price}</p>
-      <label htmlFor="amount">amount: </label>
-      {/* <img src={image} alt={title} /> */}
-      {isAdded ? (
-        <p>{amount}</p>
-      ) : (
-        <input
-          type="number"
-          id="amount"
-          name="amount"
-          value={amount}
-          onChange={(e) => setAmount(Number(e.target.value))}
-        />
+      {!isFormOpen && (
+        <p className="text-xl">
+          Price: <b>{getPriceFormat(price, "EGP", 50.3)}</b>
+        </p>
+      )}
+      {!isAdded && isFormOpen && (
+        <ProductForm id={id} onAddClick={onAddClick} price={price} />
       )}
 
-      <button type="button" onClick={handleAddClick}>
-        {isAdded ? "Remove from" : "Add to"} Cart
-      </button>
-      <button
-        type="button"
-        onClick={() => {
-          onFavClick(id);
-        }}
-      >
-        {isFavourite ? "Remove from favs" : "Add to favs"}
-      </button>
+      <div className="flex justify-center py-2 gap-4">
+        {isAdded ? (
+          <button
+            type="button"
+            className="btn"
+            onClick={() => {
+              onAddClick(id, 0);
+            }}
+          >
+            Remove From Cart
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="btn"
+            onClick={() => {
+              setFormOpen(!isFormOpen);
+            }}
+          >
+            {isFormOpen ? "Cancel" : "Add to cart"}
+          </button>
+        )}
+        <button
+          type="button"
+          className="btn"
+          onClick={() => {
+            onFavClick(id);
+          }}
+        >
+          {isFavourite ? "Remove from favs" : "Add to favs"}
+        </button>
+      </div>
     </li>
   );
 }
