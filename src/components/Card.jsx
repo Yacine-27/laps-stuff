@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Transition } from "@headlessui/react";
 import ProductForm from "./ProductForm";
 
 import { getPriceFormat } from "../util";
@@ -34,9 +35,20 @@ export default function Card({
           Price: <b>{getPriceFormat(price, "EGP", 50.3)}</b>
         </p>
       )}
-      {!isAdded && isFormOpen && (
-        <ProductForm id={id} onAddClick={onAddClick} price={price} />
-      )}
+
+      <Transition
+        show={!isAdded && isFormOpen}
+        enter="transition-opacity duration-500"
+        enterFrom="opacity-0"
+        enterTo="opacity-100"
+        leave="transition-opacity duration-500"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0"
+      >
+        <div>
+          <ProductForm id={id} onAddClick={onAddClick} price={price} />
+        </div>
+      </Transition>
 
       <div className="flex justify-center py-2 gap-4">
         {isAdded ? (

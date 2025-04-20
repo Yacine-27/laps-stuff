@@ -9,7 +9,7 @@ export default function TopPicks({
   return (
     <div className="flex flex-col gap-2 items-center px-3">
       <h3 className=" text-2xl font-semibold">Top Picks : </h3>
-      <ul className="flex gap-5 flex-wrap items-start justify-center py-4">
+      <ul className="flex gap-5 flex-wrap justify-center py-4">
         {topPicks.map((product) => (
           <Card
             key={product.id}
