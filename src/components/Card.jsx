@@ -16,6 +16,20 @@ export default function Card({
   image,
 }) {
   const [isFormOpen, setFormOpen] = useState(false);
+  const [amount, setAmount] = useState(1);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onAddClick(id, amount);
+    setFormOpen(false);
+  };
+
+  const handleMoreItemClick = (amount) => {
+    setAmount(amount + 1);
+  };
+
+  const handleLessItemClick = (amount) => {
+    if (amount > 1) setAmount(amount - 1);
+  };
 
   return (
     <li
@@ -46,7 +60,13 @@ export default function Card({
         leaveTo="opacity-0"
       >
         <div>
-          <ProductForm id={id} onAddClick={onAddClick} price={price} />
+          <ProductForm
+            price={price}
+            amount={amount}
+            onSubmit={handleSubmit}
+            onMoreItemClick={handleMoreItemClick}
+            onLessItemClick={handleLessItemClick}
+          />
         </div>
       </Transition>
 

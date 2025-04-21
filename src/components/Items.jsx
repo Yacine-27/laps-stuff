@@ -1,4 +1,5 @@
 import Card from "./Card";
+import Spinner from "./Spinner";
 
 export default function Items({
   data,
@@ -7,10 +8,10 @@ export default function Items({
   onAddClick,
   onFavClick,
 }) {
-  if (isLoading || !data) return <p>loading...</p>;
+  if (isLoading || !data) return <Spinner />;
   if (error) return <p>An errror occured {error}</p>;
   return (
-    <ul>
+    <ul className="flex gap-3 flex-wrap">
       {data.map((product) => (
         <Card
           key={product.id}

@@ -8,13 +8,13 @@ export default function Layout() {
     isLoading: isLoadingPhones,
     error: phonesDataError,
     setData: setPhonesData,
-  } = useFetch("https://dummyjson.com/products/category/smartphones?limit=2");
+  } = useFetch("https://dummyjson.com/products/category/smartphones?limit=6");
   const {
     data: laptopsData,
     isLoading: isLoadingLaptops,
     error: laptopsDataError,
     setData: setLaptopsData,
-  } = useFetch("https://dummyjson.com/products/category/laptops?limit=2");
+  } = useFetch("https://dummyjson.com/products/category/laptops");
 
   const handleAddClick = (id, amount, data, setData) => {
     if (!data) return;

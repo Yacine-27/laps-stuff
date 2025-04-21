@@ -7,3 +7,11 @@
 .btn {
   @apply bg-slate-900 p-3 rounded-2xl hover:bg-violet-500 cursor-pointer text-xs font-semibold;
 }
+
+.filter-widget {
+  @apply flex justify-between gap-4;
+}
+
+.filter-widget-label {
+  @apply text-lg font-semibold;
+}

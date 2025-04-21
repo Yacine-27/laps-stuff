@@ -11,7 +11,7 @@ export default function Home() {
     ? null
     : [
         ...getRandomItems(laptops.laptopsData, 2),
-        ...getRandomItems(phones.phonesData),
+        ...getRandomItems(phones.phonesData, 2),
       ];
   return (
     <div className="bg-slate-950 text-white min-h-screen">
