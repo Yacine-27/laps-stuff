@@ -38,6 +38,16 @@ export default function Layout() {
     handleAddClick(id, amount, laptopsData, setLaptopsData);
   };
 
+  const handleChangeAmount = (id, amount, data, setData) => {
+    setData(data.map((item) => (item.id === id ? { ...item, amount } : item)));
+  };
+
+  const handleChangeAmountPhone = (id, amount) => {
+    handleChangeAmount(id, amount, phonesData, setPhonesData);
+  };
+  const handleChangeAmountLaptop = (id, amount) => {
+    handleChangeAmount(id, amount, laptopsData, setLaptopsData);
+  };
   const handleFavouriteClick = (id, data, setData) => {
     setData(
       data.map((product) => {
@@ -73,6 +83,7 @@ export default function Layout() {
             isLoadingPhones,
             handleAddClickPhone,
             handleFavouriteClickPhone,
+            handleChangeAmountPhone,
           },
           laptops: {
             laptopsData,
@@ -80,6 +91,7 @@ export default function Layout() {
             isLoadingLaptops,
             handleAddClickLaptop,
             handleFavouriteClickLaptop,
+            handleChangeAmountLaptop,
           },
           onReset: handleResetCart,
         }}

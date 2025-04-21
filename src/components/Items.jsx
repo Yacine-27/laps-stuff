@@ -11,7 +11,7 @@ export default function Items({
   if (isLoading || !data) return <Spinner />;
   if (error) return <p>An errror occured {error}</p>;
   return (
-    <ul className="flex gap-3 flex-wrap">
+    <ul className="flex gap-3 flex-wrap justify-center">
       {data.map((product) => (
         <Card
           key={product.id}

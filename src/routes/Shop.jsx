@@ -39,7 +39,7 @@ export default function Shop() {
         onToggle={handleToggleFilter}
       />
       {showProducts.phones && (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 ">
           <h1 className="font-bold text-2xl mb-2">Phones:</h1>
           <Items
             data={matchedPhones}
@@ -52,7 +52,7 @@ export default function Shop() {
       )}
 
       {showProducts.laps && (
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 ">
           <h1 className="text-2xl font-bold mt-3">Laptops</h1>
           <Items
             data={matchedLaptops}
