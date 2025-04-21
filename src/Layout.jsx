@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import useFetch from "./hooks/useFetch";
 import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 
 export default function Layout() {
   const {
@@ -96,7 +97,7 @@ export default function Layout() {
           onReset: handleResetCart,
         }}
       />
-      <hr />
+      <Footer />
     </>
   );
 }
