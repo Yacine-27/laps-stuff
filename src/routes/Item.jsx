@@ -41,51 +41,53 @@ export default function Item() {
   return (
     <div className="bg-slate-950 min-h-screen text-white flex flex-col items-start">
       <BackButton />
-      <div className="flex flex-col sm:flex-row sm:items-start sm:text-start  items-center text-center  gap-2 pt-4 pl-4">
+      <div className="flex flex-col items-center sm:flex-row sm:items-start gap-2 pt-4 pl-4 ">
         <img
           src={item.image}
           alt={item.title}
-          className="max-w-70 max-h-70 bg-slate-600 rounded-xl"
+          className="max-w-70 max-h-70 bg-slate-600 rounded-xl lg:max-w-100 lg:max-h-100"
         />
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1 h-full text-center sm:text-start">
           {" "}
-          <p className="font-bold text-xl">{item.title}</p>
+          <p className="font-bold text-xl ">{item.title}</p>
           <p className="text-slate-300">{item.description}</p>
           <p className="text-xl font-semibold pt-3">
             Price: {getPriceFormat(item.price, "EGP", 50.3)}
           </p>
-          <div className="flex self-center pt-3 gap-3 items-center mb-3 pb-2 sm:pb-0">
-            <button
-              className="bg-violet-700 py-1 px-3 rounded-lg text-xl font-semibold hover:bg-violet-800 cursor-pointer"
-              onClick={() => {
-                if (amount > 1) setAmount(amount - 1);
-              }}
-            >
-              -
-            </button>
-            <p className="text-xl font-semibold"> Amount : {amount}</p>
-            <button
-              className="bg-violet-700 py-1 px-3 rounded-lg text-xl font-semibold hover:bg-violet-800 cursor-pointer"
-              onClick={() => {
-                setAmount(amount + 1);
-              }}
-            >
-              +
-            </button>
-          </div>
-          <div className="flex mt-auto mb-3 justify-center gap-3">
-            <button
-              onClick={handleAddClick}
-              className="bg-violet-800 p-2 rounded font-semibold hover:bg-violet-950 cursor-pointer"
-            >
-              {item.isAdded ? "Remove from Cart" : "Add to Cart"}
-            </button>
-            <button
-              className="bg-violet-800 p-2 rounded font-semibold hover:bg-violet-950 cursor-pointer"
-              onClick={handleFavClick}
-            >
-              {item.isFavourite ? "Remove from" : "Add to"} Favs
-            </button>
+          <div className="mt-auto">
+            <div className="flex self-center pt-3 gap-3  items-center mb-3 pb-2 sm:pb-0 justify-center">
+              <button
+                className="bg-violet-700 py-1 px-3 rounded-lg text-xl font-semibold hover:bg-violet-800 cursor-pointer"
+                onClick={() => {
+                  if (amount > 1) setAmount(amount - 1);
+                }}
+              >
+                -
+              </button>
+              <p className="text-xl font-semibold"> Amount : {amount}</p>
+              <button
+                className="bg-violet-700 py-1 px-3 rounded-lg text-xl font-semibold hover:bg-violet-800 cursor-pointer"
+                onClick={() => {
+                  setAmount(amount + 1);
+                }}
+              >
+                +
+              </button>
+            </div>
+            <div className="flex mb-3 justify-center gap-3">
+              <button
+                onClick={handleAddClick}
+                className="bg-violet-800 p-2 rounded font-semibold hover:bg-violet-950 cursor-pointer"
+              >
+                {item.isAdded ? "Remove from Cart" : "Add to Cart"}
+              </button>
+              <button
+                className="bg-violet-800 p-2 rounded font-semibold hover:bg-violet-950 cursor-pointer"
+                onClick={handleFavClick}
+              >
+                {item.isFavourite ? "Remove from" : "Add to"} Favs
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -14,7 +14,7 @@ export default function Recommendations({
           <h2 className="text-lg font-semibold text-slate-300">
             You might also like:{" "}
           </h2>
-          <ul className="flex gap-4 justify-center flex-wrap">
+          <ul className="flex gap-4 justify-center flex-wrap pb-2">
             {recommendations.map((product) => (
               <Card
                 key={product.id}
