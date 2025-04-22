@@ -14,6 +14,7 @@ export default function Card({
   onAddClick,
   onFavClick,
   image,
+  isSmall,
 }) {
   const [isFormOpen, setFormOpen] = useState(false);
   const [amount, setAmount] = useState(1);
@@ -34,18 +35,30 @@ export default function Card({
   return (
     <li
       id={id}
-      className="flex flex-col rounded-xl shadow-lg bg-slate-800 w-70 p-2 justify-around"
+      className={`flex flex-col rounded-xl shadow-lg bg-slate-800 ${
+        isSmall ? "w-55" : "w-70"
+      } p-2 justify-around`}
     >
-      <div className="w-full h-64 overflow-hidden flex items-center justify-center bg-slate-700 rounded-xl">
+      <div
+        className={`w-full ${
+          isSmall ? "h-32" : "h-64"
+        } overflow-hidden flex items-center justify-center bg-slate-700 rounded-xl`}
+      >
         <img src={image} alt={title} className="w-full h-full object-contain" />
       </div>
 
       <Link to={`../item/${id}`} className="self-center">
-        <h4 className="py-3 text-2xl font-semibold hover:underline">{title}</h4>
+        <h4
+          className={`py-3  ${
+            isSmall ? "text-xl" : "text-2xl"
+          } font-semibold hover:underline`}
+        >
+          {title}
+        </h4>
       </Link>
 
       {!isFormOpen && (
-        <p className="text-xl">
+        <p className={isSmall ? "text-lg" : "text-xl"}>
           Price: <b>{getPriceFormat(price, "EGP", 50.3)}</b>
         </p>
       )}

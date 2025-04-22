@@ -21,11 +21,15 @@ export default function CartProduct({
   };
   return (
     <div className="bg-slate-600 rounded-xl flex flex-col gap-1 p-1 mx-2 lg:w-120 md:w-100">
-      <div className=" p-3 flex gap-3 relative">
-        <img src={image} alt={title} className="max-w-15 rounded-2xl" />
+      <div className=" p-3 flex gap-3 relative items-center">
+        <img
+          src={image}
+          alt={title}
+          className="max-w-16 rounded-2xl bg-slate-700"
+        />
         <Link
           to={`../item/${id}`}
-          className="text-xl font-bold pt-4 hover:underline"
+          className="text-xl font-bold pt-2 hover:underline"
         >
           {" "}
           {title}

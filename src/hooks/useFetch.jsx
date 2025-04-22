@@ -17,6 +17,7 @@ function useFetch(url) {
               id: product.id,
               title: product.title,
               price: product.price,
+              description: product.description,
               image: product.images[0],
               category:
                 product.category === "smartphones" ? "phones" : "laptops",
