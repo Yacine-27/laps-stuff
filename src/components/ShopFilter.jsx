@@ -1,13 +1,30 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Transition } from "@headlessui/react";
 
 export default function ShopFilter({ showPhones, showLaps, onToggle }) {
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
   const handleToggle = (e) => {
     onToggle(e.target.id);
   };
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target));
+      {
+        setIsOpen(false);
+      }
+    };
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
   return (
-    <div className="flex flex-col gap-3 self-center">
+    <div className="flex flex-col gap-3 self-center" ref={dropdownRef}>
       <button
         type="button"
         className="p-2 mt-5 bg-slate-800 font-semibold rounded-lg cursor-pointer hover:bg-violet-950"
